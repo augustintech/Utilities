@@ -1,0 +1,21 @@
+Operating system: Linux
+Distribution: Ubuntu 18.04
+
+Packages installed: wpa_supplicant
+Installation: sudo apt-get install wpasupplicant
+
+
+Set of commands to connect to a WPA2 AP with a CLI client. Note: Client must have a NIC (wirelesse card/chip) that supports 802.11 and WPA2 standard.
+
+- Check your wireless interface(s)
+: iwconfig
+- Replace INTERFACE with your interface 
+: sudo iwlist INTERFACE scan | grep ESSID
+- Generate wpa_supplicant configuration with your the AP’s password and ESSID in the home directory
+: wpa_passphrase ESSID PASSWORD | sudo tee ~/wpa_supplicant.conf
+- Connect your NIC to the access point
+: sudo wpa_supplicant -c ~/wpa_supplicant.conf -i INTERFACE
+- Get an IP address and basic network configuration from your DHCP server
+: sudo dhclient INTERFACE
+- Test connectivity by pinging the example.com domain
+: ping www.example.com
